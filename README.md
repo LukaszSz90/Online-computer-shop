@@ -2,7 +2,7 @@
 
 ---
 
-[![Build status](https://github.com/online-computer-shop/project/workflows/Build/badge.svg)](https://github.com/online-computer-shop/project/actions)
+[![Build status](https://github.com/online-computer-shop/workflows/Build/badge.svg)](https://github.com/online-computer-shop/actions)
 
 ---
 
