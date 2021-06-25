@@ -1,0 +1,19 @@
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("top-navbar");
+var sticky = header.offsetTop;
+
+function myFunction() {
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
+
+$(document).ready(function() {
+    $('#loginModal').modal('hide');
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+});

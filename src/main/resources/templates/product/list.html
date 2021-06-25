@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: heading">
+
+    <meta charset="UTF-8">
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/webjars/font-awesome/5.8.2/css/all.css" rel="stylesheet"/>
+    <title>Lista produktów</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="content">
+    <div class="middle">
+        <table class="table table-hover">
+            <thead class="table-header">
+            <tr>
+                <th scope="col">Nazwa produktu
+                    <a th:href="@{'/product/list/filter/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir} + '&searchRegex=' + ${searchRegex}}">
+                        <i class="fas fa-angle-double-down" th:if="${sortDir.equals('desc')}"></i>
+                        <i class="fas fa-angle-double-up" th:if="${sortDir.equals('asc')}"></i>
+                    </a>
+                </th>
+                <th scope="col">Kategoria produktu
+                    <a th:href="@{'/product/list/filter/page/' + ${currentPage} + '?sortField=category&sortDir=' + ${reverseSortDir} + '&searchRegex=' + ${searchRegex}}">
+                        <i class="fas fa-angle-double-down" th:if="${sortDir.equals('desc')}"></i>
+                        <i class="fas fa-angle-double-up" th:if="${sortDir.equals('asc')}"></i>
+                    </a>
+                </th>
+                <th scope="col">Cena produktu
+                    <a th:href="@{'/product/list/filter/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir} + '&searchRegex=' + ${searchRegex}}">
+                        <i class="fas fa-angle-double-down" th:if="${sortDir.equals('desc')}"></i>
+                        <i class="fas fa-angle-double-up" th:if="${sortDir.equals('asc')}"></i>
+                    </a>
+                </th>
+                <th>Koszyk</th>
+            </tr>
+            </thead>
+            <tbody class="table-content">
+            <tr th:each="product : ${allProducts}">
+                <td>
+                    <a th:href="@{'/product/view/' + ${product.id}}">
+                         <p th:text="${product.name}">Nazwa testowa</p>
+                    </a>
+                </td>
+                <td th:text="${product.category.name}">Kategoria testowa</td>
+                <td th:text="${product.price}">999.99</td>
+                <td th:with="addOrder=@{/order/add}">
+                    <form method="post" th:action="@{${addOrder}}">
+                        <input type="hidden" name="productId" th:value="${product.id}"/>
+                        <button type="submit" class="waves-effect waves-light btn-small">
+                            Dodaj
+                        </button>
+                    </form>
+                </td>
+<!--                <td>-->
+<!--                    <a th:href="@{'/order/add?productId=' + ${product.id}}">Dodaj</a>-->
+<!--                </td>-->
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer">
+            <div class="table-total-items">
+                Total items: <span th:text="${totalItems}">xxx</span>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <span class="pagination">
+                    <span class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <a class="page-link" th:if="${currentPage != i}"
+                           th:href="@{'/product/list/filter/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&searchRegex=' + ${searchRegex}}"
+                           th:text="${i}">
+                        </a>
+                        <a class="page-link" th:if="${currentPage == i}" th:href="@{#}" th:text="${i}">
+                        </a>
+                    </span>
+                </span>
+            </nav>
+            <div class="clear-both"></div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+<script th:src="@{https://kit.fontawesome.com/a076d05399.js}"></script>
+<script th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script th:src="@{/js/home.js}"></script>
+<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
