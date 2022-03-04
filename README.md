@@ -15,4 +15,4 @@ I propose to register as a new user with imaginary data, (e.g. login: ab@ab.com 
 
 ---
 
-View the application page: online-computer-shop.herokuapp.com/home
+View the application page: https://online-computer-shop.herokuapp.com/home
